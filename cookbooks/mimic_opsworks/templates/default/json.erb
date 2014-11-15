@@ -1,0 +1,220 @@
+{
+  "dependencies": {
+    "gem_binary": "/usr/local/bin/gem",
+    "gems": {
+    },
+    "debs": {
+    }
+  },
+  "ebs": {
+    "devices": {
+    },
+    "raids": {
+    }
+  },
+  "ssh_users": {
+  },
+  "opsworks_rubygems": {
+    "version": "2.2.2"
+  },
+  "opsworks_bundler": {
+    "version": "1.5.3",
+    "manage_package": true
+  },
+  "ssh_host_rsa_key_private": null,
+  "ssh_host_rsa_key_public": null,
+  "ssh_host_dsa_key_private": null,
+  "ssh_host_dsa_key_public": null,
+  "deploy": {
+    "<%= node[:app_name] %>": {
+      "application": "<%= node[:app_name] %>",
+      "application_type": "rails",
+      "environment": {
+        "SECRET_KEY_BASE": "<%= node[:SECRET_KEY_BASE] %>",
+        "TWITTER_KEY": "<%= node[:TWITTER_KEY] %>",
+        "TWITTER_SECRET": "<%= node[:TWITTER_SECRET] %>",
+        "FACEBOOK_ID": "<%= node[:FACEBOOK_ID] %>",
+        "FACEBOOK_SECRET": "<%= node[:FACEBOOK_SECRET] %>"
+      },
+      "environment_variables": {
+        "SECRET_KEY_BASE": "<%= node[:SECRET_KEY_BASE] %>",
+        "TWITTER_KEY": "<%= node[:TWITTER_KEY] %>",
+        "TWITTER_SECRET": "<%= node[:TWITTER_SECRET] %>",
+        "FACEBOOK_ID": "<%= node[:FACEBOOK_ID] %>",
+        "FACEBOOK_SECRET": "<%= node[:FACEBOOK_SECRET] %>"
+      },
+      "auto_bundle_on_deploy": true,
+      "deploy_to": "/srv/www/<%= node[:app_name] %>",
+      "deploying_user": null,
+      "document_root": "public",
+      "domains": [
+        "<%= node[:app_name] %>"
+      ],
+      "migrate": true,
+      "mounted_at": null,
+      "rails_env": "development",
+      "restart_command": null,
+      "sleep_before_restart": 0,
+      "ssl_support": false,
+      "ssl_certificate": null,
+      "ssl_certificate_key": null,
+      "ssl_certificate_ca": null,
+      "scm": {
+        "scm_type": "git",
+        "repository": "/vagrant",
+        "revision": issues/19,
+        "ssh_key": null,
+        "user": null,
+        "password": null
+      },
+      "symlink_before_migrate": {
+        "config/database.yml": "config/database.yml",
+        "config/memcached.yml": "config/memcached.yml"
+      },
+      "symlinks": {
+        "system": "public/system",
+        "pids": "tmp/pids",
+        "log": "log"
+      },
+      "database": {
+        "adapter": "postgresql",
+        "username": "<%= node[:postgresql][:username] %>",
+        "password": "<%= node[:postgresql][:password] %>",
+        "host": "localhost"
+      },
+      "memcached": {
+        "host": null,
+        "port": 11211
+      }
+    }
+  },
+  "languages": {
+    "ruby": {
+      "ruby_bin": "/usr/bin/ruby"
+    }
+  },
+  "rails": {
+    "max_pool_size": 8
+  },
+  "opsworks": {
+    "layers": {
+      "db-master": {
+        "instances": {
+        }
+      },
+      "rails-app": {
+        "name": "Rails App Server",
+        "id": "99999999-9999-9999-9999-999999999999",
+        "elb-load-balancers": [
+
+        ],
+        "instances": {
+        }
+      },
+      "postgresql": {
+        "name": "PostgreSQL Server",
+        "id": "99999999-9999-9999-9999-999999999999",
+        "elb-load-balancers": [
+
+        ],
+        "instances": {
+        }
+      }
+    },
+    "activity": "setup",
+    "valid_client_activities": [
+      "reboot",
+      "stop",
+      "deploy",
+      "setup",
+      "configure",
+      "update_dependencies",
+      "install_dependencies",
+      "update_custom_cookbooks",
+      "execute_recipes"
+    ],
+    "sent_at": 9999999999,
+    "deployment": null,
+    "applications": [
+      {
+        "name": "<%= node[:app_name] %>",
+        "slug_name": "<%= node[:app_name] %>",
+        "application_type": "rails"
+      }
+    ],
+    "stack": {
+      "name": "<%= node[:app_name] %>",
+      "id": "99999999-9999-9999-9999-999999999999",
+      "vpc_id": "vpc-99999999",
+      "elb-load-balancers": [
+
+      ],
+      "rds_instances": [
+
+      ]
+    },
+    "instance": {
+      "id": "799999999-9999-9999-9999-999999999999",
+      "hostname": "rails-app1",
+      "instance_type": "c3.large",
+      "public_dns_name": "ec2-99-99-99-99.ap-northeast-1.compute.amazonaws.com",
+      "private_dns_name": "ip-99-99-99-99.ap-northeast-1.compute.internal",
+      "ip": "99.99.99.99",
+      "private_ip": "99.99.99.99",
+      "architecture": "x86_64",
+      "layers": [
+        "postgresql",
+        "rails-app"
+      ],
+      "backends": 8,
+      "aws_instance_id": "i-99999999",
+      "region": "ap-northeast-1",
+      "availability_zone": "ap-northeast-1a",
+      "subnet_id": "subnet-99999999",
+      "infrastructure_class": "ec2"
+    },
+    "ruby_version": "2.1",
+    "ruby_stack": "ruby",
+    "rails_stack": {
+      "name": "nginx_unicorn"
+    }
+  },
+  "unicorn": {
+  },
+  "opsworks_custom_cookbooks": {
+    "enabled": true,
+    "scm": {
+      "type": "git",
+      "repository": "https://github.com/tarky/ops_berks.git",
+      "user": null,
+      "password": null,
+      "revision": null,
+      "ssh_key": null
+    },
+    "manage_berkshelf": true,
+    "berkshelf_version": "3.1.3",
+    "recipes": [
+      "opsworks_initial_setup",
+      "dependencies",
+      "opsworks_ganglia::client",
+      "unicorn::rails",
+      "postgresql::client",
+      "postgresql::server",
+      "deploy::default",
+      "deploy::rails",
+    ]
+  },
+  "chef_environment": "_default",
+  "recipes": [
+    "opsworks_custom_cookbooks::load",
+    "opsworks_custom_cookbooks::execute"
+  ],
+  "opsworks_commons": {
+    "assets_url": "https://opsworks-instance-assets-us-east-1.s3.amazonaws.com"
+  },
+  "postgresql": {
+    "password": {
+      "<%= node[:postgresql][:username] %>": "<%= node[:postgresql][:md5_password] %>"
+    }
+  }
+}
