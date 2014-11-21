@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.provision "shell", inline: "opsworks-agent-cli run_command"
   config.vm.provision "chef_solo" do |chef|  
+    chef.json = { app_name: app_name }
     chef.run_list = ["mimic_opsworks::link_local"]
   end
-  config.vm.provision "shell", inline: "cd /srv/www/#{app_name}/current; bundle install"
 end

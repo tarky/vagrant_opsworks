@@ -44,6 +44,10 @@
         "FACEBOOK_SECRET": "<%= node[:FACEBOOK_SECRET] %>"
       },
       "auto_bundle_on_deploy": true,
+      "ignore_bundler_groups": [
+        "test",
+        "production"
+       ],
       "deploy_to": "/srv/www/<%= node[:app_name] %>",
       "deploying_user": null,
       "document_root": "public",
