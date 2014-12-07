@@ -1,3 +1,4 @@
+include_recipe "mimic_opsworks::recreate_releases"
 directory "/var/lib/aws/opsworks/chef" do
   recursive true
   action :delete

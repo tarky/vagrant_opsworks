@@ -11,6 +11,8 @@ execute "copy .bundle" do
   command "cp -r releases/*/.bundle current"
 end
 
+include_recipe "mimic_opsworks::recreate_releases"
+
 template "/srv/www/#{node['app_name']}/current/config/database.yml" 
 
 bash "/srv/www/#{node['app_name']}/shared/scripts/unicorn restart"
