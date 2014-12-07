@@ -1,4 +1,8 @@
 directory "/var/lib/aws/opsworks/chef" do
+  recursive true
+  action :delete
+end
+directory "/var/lib/aws/opsworks/chef" do
   mode '0755'
   action :create
 end

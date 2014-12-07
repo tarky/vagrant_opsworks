@@ -7,19 +7,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", 1024]
   end
-  app_name = "inq"
-  config.vbguest.auto_update = false
   config.vm.box = "ubuntu1404-opsworks"
   config.vm.network "private_network", ip: "192.168.33.10"
   config.vm.synced_folder ".", "/vagrant", type: 'nfs'
   config.vm.provision "shell", inline: "apt-get update > /dev/null" 
   config.vm.provision "chef_solo" do |chef|  
-    chef.json = { app_name: app_name }
     chef.run_list = ["mimic_opsworks::default"]
   end
   config.vm.provision "shell", inline: "opsworks-agent-cli run_command"
   config.vm.provision "chef_solo" do |chef|  
-    chef.json = { app_name: app_name }
     chef.run_list = ["mimic_opsworks::link_local"]
   end
 end

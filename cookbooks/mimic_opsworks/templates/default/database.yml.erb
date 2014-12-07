@@ -1,0 +1,11 @@
+<% %w(development test).each do |env| -%>
+<%= env %>:
+  adapter: "postgresql"
+  database: "<%= node[:app_name] %>_<%= env %>"
+  encoding: "utf8"
+  host: "localhost"
+  username: "<%= node[:postgresql][:username] %>"
+  password: "<%= node[:postgresql][:password] %>"
+  reconnect: false
+
+<% end -%>
