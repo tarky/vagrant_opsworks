@@ -21,6 +21,4 @@ file "/srv/www/#{node['app_name']}/shared/config/unicorn.conf" do
   _file.write_file
 end
 
-bash "/srv/www/#{node['app_name']}/shared/scripts/unicorn restart"
-
 template "/etc/profile.d/for_dev.sh"
