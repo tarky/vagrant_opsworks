@@ -1,3 +1,4 @@
 alias be='bundle exec'
-alias do_unicorn='/srv/www/<%= node['app_name']%>/shared/scripts/unicorn'
 cd /srv/www/<%= node['app_name']%>/current 
+export PATH=/srv/www/<%= node['app_name']%>/shared/scripts:\
+/srv/www/<%= node['app_name']%>/current/bin:$PATH 
