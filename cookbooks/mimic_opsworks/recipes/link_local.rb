@@ -13,7 +13,7 @@ end
 
 include_recipe "mimic_opsworks::recreate_releases"
 
-template "/srv/www/#{node['app_name']}/current/config/database.yml" 
+template "/srv/www/#{node['app_name']}/current/config/database.yml"
 
 file "/srv/www/#{node['app_name']}/shared/config/unicorn.conf" do
   _file = Chef::Util::FileEdit.new(path)
