@@ -18,6 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "chef_solo" do |chef|
     chef.run_list = ["mimic_opsworks::link_local"]
   end
-  config.vm.provision "shell",
-    inline: "/srv/www/*/shared/scripts/unicorn restart"
+  config.vm.provision "shell", inline:
+    "rake db:create RAILS_ENV=test;"\
+    "unicorn restart"
 end
