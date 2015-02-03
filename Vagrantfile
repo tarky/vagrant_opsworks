@@ -20,5 +20,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.provision "shell", inline:
     "rake db:create RAILS_ENV=test;"\
-    "unicorn restart"
+    "unicorn stop;"\
+    "unicorn start"
 end
