@@ -23,4 +23,5 @@ execute "copy gems" do
   command "cp -r /home/deploy/.bundler/#{node['app_name']}/ruby  vendor/bundle/"
 end
 
-file "/srv/www/#{node['app_name']}/current/.bundle/config"
+directory "/srv/www/#{node['app_name']}/current/.bundle"
+cookbook_file "/srv/www/#{node['app_name']}/current/.bundle/config"
