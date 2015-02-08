@@ -18,10 +18,8 @@ end
 
 template "/etc/profile.d/for_dev.sh"
 
-execute "copy gems" do
-  cwd "/srv/www/#{node['app_name']}/current"
-  command "cp -r /home/deploy/.bundler/#{node['app_name']}/ruby  vendor/bundle/"
-end
+execute "cp -Rf /home/deploy/.bundler/#{node['app_name']}/. "\
+  "/srv/www/#{node['app_name']}/current/vendor/bundle"
 
 directory "/srv/www/#{node['app_name']}/current/.bundle"
 cookbook_file "/srv/www/#{node['app_name']}/current/.bundle/config"
