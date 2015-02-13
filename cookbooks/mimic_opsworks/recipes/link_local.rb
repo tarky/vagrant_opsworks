@@ -6,6 +6,11 @@ link "/srv/www/#{node['app_name']}/current" do
   to "/vagrant"
 end
 
+execute "copy .bundle" do
+  cwd "/srv/www/#{node['app_name']}"
+  command "cp -r releases/*/.bundle current"
+end
+
 include_recipe "mimic_opsworks::recreate_releases"
 
 template "/srv/www/#{node['app_name']}/current/config/database.yml"
@@ -17,9 +22,3 @@ file "/srv/www/#{node['app_name']}/shared/config/unicorn.conf" do
 end
 
 template "/etc/profile.d/for_dev.sh"
-
-execute "cp -Rf /home/deploy/.bundler/#{node['app_name']}/. "\
-  "/srv/www/#{node['app_name']}/current/vendor/bundle"
-
-directory "/srv/www/#{node['app_name']}/current/.bundle"
-cookbook_file "/srv/www/#{node['app_name']}/current/.bundle/config"
