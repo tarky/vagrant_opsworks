@@ -16,7 +16,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.provision "shell", inline: "opsworks-agent-cli run_command"
   config.vm.provision "chef_solo" do |chef|
-    chef.run_list = ["mimic_opsworks::link_local"]
+    chef.run_list = [
+      "mimic_opsworks::link_local",
+      "set_editor_env"
+    ]
   end
   config.vm.provision "shell", inline:
     "rake db:create RAILS_ENV=test;"\
