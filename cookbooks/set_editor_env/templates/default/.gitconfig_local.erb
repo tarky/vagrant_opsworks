@@ -1,0 +1,5 @@
+[user]
+  name = <%= node[:gitconfig][:user][:name] %>
+  email = <%= node[:gitconfig][:user][:email] %>
+[credential]
+  helper = cache --timeout=3600
