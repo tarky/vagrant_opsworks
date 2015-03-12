@@ -1,5 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require 'dotenv'
+Dotenv.load
+
+env = ENV.inject({}) do |h, (k, v)|
+  h[k.to_sym] = v ; h
+end
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -12,10 +18,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", type: 'nfs'
   config.vm.provision "shell", inline: "apt-get update > /dev/null"
   config.vm.provision "chef_solo" do |chef|
+    chef.json = env
     chef.run_list = ["mimic_opsworks::default"]
   end
   config.vm.provision "shell", inline: "opsworks-agent-cli run_command"
   config.vm.provision "chef_solo" do |chef|
+    chef.json = env
     chef.run_list = [
       "mimic_opsworks::link_local",
       "set_editor_env"
