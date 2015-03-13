@@ -26,7 +26,7 @@
   "ssh_host_dsa_key_private": null,
   "ssh_host_dsa_key_public": null,
   "mysql": {
-    "server_root_password": "<%= node[:mysql][:password] %>",
+    "server_root_password": "<%= node[:MYSQL_PASSWORD] %>",
     "debian_sys_maintainer_user": "debian-sys-maint",
     "debian_sys_maintainer_password": "v4lctfsv6n",
     "clients": [
@@ -38,8 +38,8 @@
     }
   },
   "deploy": {
-    "<%= node[:app_name] %>": {
-      "application": "<%= node[:app_name] %>",
+    "<%= node[:APP_NAME] %>": {
+      "application": "<%= node[:APP_NAME] %>",
       "application_type": "rails",
       "environment": {
         "SECRET_KEY_BASE": "<%= node[:SECRET_KEY_BASE] %>",
@@ -47,9 +47,9 @@
         "TWITTER_SECRET": "<%= node[:TWITTER_SECRET] %>",
         "FACEBOOK_ID": "<%= node[:FACEBOOK_ID] %>",
         "FACEBOOK_SECRET": "<%= node[:FACEBOOK_SECRET] %>",
-        "associate_tag": "<%= node[:associate_tag] %>",
-        "AWS_access_key_id": "<%= node[:AWS_access_key_id] %>",
-        "AWS_secret_key": "<%= node[:AWS_secret_key] %>"
+        "ASSOCIATE_TAG": "<%= node[:ASSOCIATE_TAG] %>",
+        "AWS_ACCESS_KEY_ID": "<%= node[:AWS_ACCESS_KEY_ID] %>",
+        "AWS_SECRET_KEY": "<%= node[:AWS_SECRET_KEY] %>"
       },
       "environment_variables": {
         "SECRET_KEY_BASE": "<%= node[:SECRET_KEY_BASE] %>",
@@ -57,19 +57,19 @@
         "TWITTER_SECRET": "<%= node[:TWITTER_SECRET] %>",
         "FACEBOOK_ID": "<%= node[:FACEBOOK_ID] %>",
         "FACEBOOK_SECRET": "<%= node[:FACEBOOK_SECRET] %>",
-        "associate_tag": "<%= node[:associate_tag] %>",
-        "AWS_access_key_id": "<%= node[:AWS_access_key_id] %>",
-        "AWS_secret_key": "<%= node[:AWS_secret_key] %>"
+        "ASSOCIATE_TAG": "<%= node[:ASSOCIATE_TAG] %>",
+        "AWS_ACCESS_KEY_ID": "<%= node[:AWS_ACCESS_KEY_ID] %>",
+        "AWS_SECRET_KEY": "<%= node[:AWS_SECRET_KEY] %>"
       },
       "auto_bundle_on_deploy": true,
       "ignore_bundler_groups": [
         "production"
        ],
-      "deploy_to": "/srv/www/<%= node[:app_name] %>",
+      "deploy_to": "/srv/www/<%= node[:APP_NAME] %>",
       "deploying_user": null,
       "document_root": "public",
       "domains": [
-        "<%= node[:app_name] %>"
+        "<%= node[:APP_NAME] %>"
       ],
       "migrate": true,
       "mounted_at": null,
@@ -83,7 +83,7 @@
       "scm": {
         "scm_type": "git",
         "repository": "/vagrant",
-        "revision": <%= node[:revision] %>,
+        "revision": "<%= node[:REVISION] %>",
         "ssh_key": null,
         "user": null,
         "password": null
@@ -99,10 +99,10 @@
       },
       "database": {
         "host": "localhost",
-        "database": "<%= node[:app_name] %>_development",
+        "database": "<%= node[:APP_NAME] %>_development",
         "port": 3306,
         "username": "root",
-        "password": "<%= node[:mysql][:password] %>",
+        "password": "<%= node[:MYSQL_PASSWORD] %>",
         "reconnect": true,
         "data_source_provider": "stack",
         "type": "mysql"
@@ -158,13 +158,13 @@
     "deployment": null,
     "applications": [
       {
-        "name": "<%= node[:app_name] %>",
-        "slug_name": "<%= node[:app_name] %>",
+        "name": "<%= node[:APP_NAME] %>",
+        "slug_name": "<%= node[:APP_NAME] %>",
         "application_type": "rails"
       }
     ],
     "stack": {
-      "name": "<%= node[:app_name] %>",
+      "name": "<%= node[:APP_NAME] %>",
       "id": "99999999-9999-9999-9999-999999999999",
       "vpc_id": "vpc-99999999",
       "elb-load-balancers": [

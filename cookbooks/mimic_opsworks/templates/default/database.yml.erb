@@ -1,11 +1,17 @@
-<% %w(development test).each do |env| -%>
-<%= env %>:
+development: &development
   adapter: "mysql2"
-  database: "<%= node[:app_name] %>_<%= env %>"
+  database: "<%= node[:APP_NAME] %>_development"
+  database: "inq_development"
   encoding: "utf8"
   host: "localhost"
   username: "root"
-  password: "<%= node[:mysql][:password] %>"
+  password: "<%= node[:MYSQL_PASSWORD] %>"
   reconnect: true
   port: 3306
-<% end -%>
+
+test:
+  <<: *development
+  database: "<%= node[:APP_NAME] %>_test"
+
+debug:
+  <<: *development

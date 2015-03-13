@@ -1,4 +1,4 @@
 alias be='bundle exec'
-cd /srv/www/<%= node['app_name']%>/current
-export PATH=/srv/www/<%= node['app_name']%>/shared/scripts:\
-/srv/www/<%= node['app_name']%>/current/bin:$PATH
+cd /srv/www/<%= node[:APP_NAME] %>/current
+export PATH=/srv/www/<%= node[:APP_NAME] %>/shared/scripts:\
+/srv/www/<%= node[:APP_NAME] %>/current/bin:$PATH
