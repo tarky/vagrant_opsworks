@@ -13,6 +13,7 @@ git "/root/dotfiles" do
   enable_submodules true
 end
 execute "sh /root/dotfiles/dotfilesLink.sh"
+template "/root/.gitconfig_local"
 
 #go and hub
 directory "/root/gocode"
